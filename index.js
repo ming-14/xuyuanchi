@@ -1,4 +1,4 @@
-var post_url = 'https://6f5b3dfe.cpolar.cn';
+var post_url = 'https://51eea0fc.cpolar.cn';
 
 var container = document.querySelector(".container");
 var zindex = 1;

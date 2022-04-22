@@ -20,8 +20,7 @@ function creatWish(words, ty) {
          */
         //请求后的回调接口，可将请求成功后要执行的程序写在其中
         //httpRequest.onreadystatechange = function () {};
-	window.open("./data/close.html", "_blank", "resizable,scrollbars,status");
-
+        window.open('./data/close.html','_blank');
 	return;
         alert("审核后展示");
     }

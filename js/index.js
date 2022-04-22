@@ -1,4 +1,4 @@
-var post_url = 'https://6f5b3dfe.cpolar.cn';	//上传数据的url
+var post_url = 'https://51eea0fc.cpolar.cn';	//上传数据的url
 
 var container = document.querySelector(".container");
 var zindex = 1;

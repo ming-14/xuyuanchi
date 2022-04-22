@@ -1,23 +1,34 @@
+var post_url = 'http://127.0.0.1:81';
+
 var container = document.querySelector(".container");
 var zindex = 1;
 
 // 创建一个愿望
 function creatWish(words, ty) {
+
     //将数据发送至服务器
     if(ty == 1)
     {
         var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
         //这里的url要修改
-        httpRequest.open('POST', 'https://263af0b3.cpolar.cn/post', true); //第二步：打开连接
+        httpRequest.open('POST', post_url + '/post', true); //第二步：打开连接
         httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
         httpRequest.send('ta=' + words +' &ip=' + returnCitySN["cip"]);//发送请求 将情头体写在send中
-        
+        //alert(httpRequest.status);
+        httpRequest.onreadystatechange = function () {
+                if(httpRequest.status != 200)
+                {
+                    alert(httpRequest.status)
+                    return;
+                }
+        };
         /**
          * 获取数据后的处理程序
          */
         //请求后的回调接口，可将请求成功后要执行的程序写在其中
         //httpRequest.onreadystatechange = function () {};
-     
+	
+	 
         alert("审核后展示");
     }
 

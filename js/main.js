@@ -26,11 +26,16 @@ function htmlEscape( text ) {
     } );
 }
 
-//将临时储存的数据放处
+//将临时储存的数据放出
 function addCookieData() {
     if ( getCookieLength() === 0 )
         //没有数据
         return;
+
+    //准备好私钥
+    //使用私钥解密
+    var decrypt = new JSEncrypt();
+    decrypt.setPrivateKey( '-----BEGIN RSA PRIVATE KEY-----' + PRIVATE_KEY + '-----END RSA PRIVATE KEY-----' );
 
     //拆分 cookie 字符串
     var cookieArr = document.cookie.split( ";" );
@@ -47,8 +52,16 @@ function addCookieData() {
                 break;
             }
         }
-        if ( !IsR )
-            creatWish( decodeURIComponent( cookiePair[ 1 ] ), 0 );
+        if ( !IsR ) {
+            var uncrypted = decrypt.decrypt( cookiePair[ 1 ] );
+            if ( uncrypted !== null ) {
+                console.log( cookiePair[ 1 ], '已解密，数据：', uncrypted );
+                creatWish( decodeURIComponent( uncrypted ), 0 );
+            } else {
+                console.log( '数据', cookiePair[ 1 ], '解密失败' );
+            }
+        }
+
 
     }
 }
@@ -61,9 +74,17 @@ function creatWish( words, ty ) {
 
     //将数据发送至服务器
     if ( ty == 1 ) {
-        //存cookie
+
+        //加密数据
+        //使用公钥加密
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey( '-----BEGIN PUBLIC KEY-----' + PUBLIC_KEY + '-----END PUBLIC KEY-----' );
+        var encrypted = encrypt.encrypt( words );
+        console.log( words, '已加密，数据：', encrypted );
+
         document.cookie = "data" + getCookieLength()
-            .toString() + "=" + words;
+            .toString() + "=" + encrypted;
+
 
         //发服务器
         var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
@@ -118,11 +139,11 @@ function creatWish( words, ty ) {
         }
     }
     container.appendChild( div );
-    
+
     console.log( "数据 \"", words, "\" 添加成功，该数据type为：", ty );
-    
-    if( ty == 1 )
-        window.open('./data/close.html','_blank'); //临时关闭
+
+    if ( ty == 1 )
+        window.open( './data/close.html', '_blank' ); //临时关闭
 }
 //产生随机数
 function getRandom( min, max ) {

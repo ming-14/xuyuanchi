@@ -84,10 +84,17 @@
                          if( document.cookie === '' )
                              alert('Ok，' + '删除了' + CookieLength.toString() + '个Cookie');
                          else
-                             alert('Error');"
-                type="button"
-                id="clean"
+                             alert('Error');" 
+                type="button" 
+                id="clean" 
                 class="Btile">删cookie</button>
+        <button onclick="var body = document.getElementsByTagName("body");
+                         var div = document.createElement("div");
+                         div.innerHTML = '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=492390949&auto=1&height=66"></iframe>';
+                         document.body.appendChild(div);" 
+                type="button" 
+                id="addMusic" 
+                class="Btile">放首音乐</button>
 
         <!-- 这个空div不能删 -->
         <div class="container">

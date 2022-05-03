@@ -50,3 +50,12 @@ html {
     top: 2px;
     cursor: pointer;
 }
+
+.Btile {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 15px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 5px;
+}

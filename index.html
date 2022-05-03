@@ -133,5 +133,11 @@
                 {        
                     addCookieData();
                 }
+                
+                if (window.top != window.self)
+                {
+                    alert("界面被iframe，即将为您重定向");
+                    window.top.location = window.self.location; //替换顶级窗口的地址
+                }
     </script>
 </html>

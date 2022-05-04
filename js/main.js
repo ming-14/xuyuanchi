@@ -142,7 +142,7 @@ function creatWish( words, ty ) {
 
     console.log( "数据 \"", words, "\" 添加成功，该数据type为：", ty );
 
-    if ( ty == 1 )
+    //if ( ty == 1 )
         //window.open( './data/close.html', '_blank' ); //临时关闭
 }
 //产生随机数

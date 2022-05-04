@@ -1,7 +1,7 @@
 "use strict";
 
 var TempData = document.cookie;
-var post_url = 'http://127.0.0.1:81'; //上传数据的url
+var post_url = 'https://18f28039.cpolar.cn'; //上传数据的url
 
 var container = document.querySelector( ".container" );
 var zindex = 1;
@@ -143,7 +143,7 @@ function creatWish( words, ty ) {
     console.log( "数据 \"", words, "\" 添加成功，该数据type为：", ty );
 
     if ( ty == 1 )
-        window.open( './data/close.html', '_blank' ); //临时关闭
+        //window.open( './data/close.html', '_blank' ); //临时关闭
 }
 //产生随机数
 function getRandom( min, max ) {

@@ -1,0 +1,98 @@
+<!Doctype html>
+<html lang="cn">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>404</title>
+        <script>
+//生成从minNum到maxNum的随机数
+
+function randomNum( minNum, maxNum ) {
+    switch ( arguments.length ) {
+        case 1:
+            return parseInt( Math.random() * minNum + 1, 10 );
+            break;
+        case 2:
+            return parseInt( Math.random() * ( maxNum - minNum + 1 ) + minNum, 10 );
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+function is_pc() {
+    var os = new Array( "Android", "iPhone", "Windows Phone", "iPod", "BlackBerry", "MeeGo", "SymbianOS" );
+    var info = navigator.userAgent;
+    var len = os.length;
+    for ( var i = 0; i < len; i++ ) {
+        if ( info.indexOf( os[ i ] ) > 0 ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function Go404() {
+    if ( is_pc() ) {
+        var Gmodel = randomNum( 1, 4 );
+        switch ( Gmodel ) {
+            case 1:    /* 腾讯404公益 */
+                window.location.href = "https://tgit-14.github.io/error/404/TencentPublicWelfare404.html";
+                break;
+            case 2:
+                window.location.href = "https://tgit-14.github.io/error/404/404-business-office-interface/index.html";
+                break;
+            case 3:
+                window.location.href = "https://tgit-14.github.io/error/404/404-delicious-food/index.html";
+                break;
+            case 4:
+                window.location.href = "https://tgit-14.github.io/error/404/404-simple-mistake/index.html";
+                break;
+            default:
+                return 0;
+                break;
+        }
+
+    } else {
+        var Gmodel = randomNum( 1, 5 );
+        switch ( Gmodel ) {
+            case 1:    /* 腾讯404公益 */
+                window.location.href = "https://tgit-14.github.io/error/404/TencentPublicWelfare404.html";
+                break;
+            case 2:
+                window.location.href = "https://tgit-14.github.io/error/404/Chrome404Game/index.html";
+                break;
+            case 2:
+                window.location.href = "https://tgit-14.github.io/error/404/404-business-office-interface/index.html";
+                break;
+            case 3:
+                window.location.href = "https://tgit-14.github.io/error/404/404-delicious-food/index.html";
+                break;
+            case 4:
+                window.location.href = "https://tgit-14.github.io/error/404/404-simple-mistake/index.html";
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
+}
+
+Go404();
+        </script>
+    </head>
+
+    <body>
+    <button onclick="Go404();"
+                type="button" 
+                id="addMusic" 
+                style="background-color: #f1f1f1;
+                       color: black;
+                       font-size: 15px;
+                       padding: 8px 14px;
+                       border: none;
+                       border-radius: 5px;">如果没有自动跳转，点我</button>
+    </body>
+
+</html>

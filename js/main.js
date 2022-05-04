@@ -86,14 +86,14 @@ function creatWish( words, ty ) {
         document.cookie = "data" + getCookieLength()
             .toString() + "=" + encrypted;
 
-
+/*
         //发服务器
         var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
         //这里的url要修改
         httpRequest.open( 'POST', post_url + '/post', true ); //第二步：打开连接
         httpRequest.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
         httpRequest.send( 'ta=' + words ); //发送请求 将情头体写在send中
-
+*/
         //return;
         alert( "审核后展示" );
     }

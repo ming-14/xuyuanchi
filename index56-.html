@@ -36,7 +36,10 @@
         <script>
             var data = isBroswer();
             if( (data['chrome'] == true && data['version'] >= 56) || data['chrome'] == false) {
-                document.createElement("script").setAttribute("src", "./js/snow/snowy.js");
+	        var script = document.createElement('script');
+	        script.setAttribute('type','text/javascript');
+	        script.setAttribute('src', '/js/snow/snowy.js');
+	        document.getElementsByTagName('head')[0].appendChild(script);
             }
         </script>
 	<style>

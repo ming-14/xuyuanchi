@@ -33,9 +33,11 @@
 	    
         <!-- 雪花 -->
         <!--<script src="./js/snow/snowy.js"></script>-->
-	<script>
-	    var data = isBroswer();
-            if( (data['chrome'] == true && data['version'] >= 56) || data['chrome'] == false) { document.createElement("script").setAttribute("src", "/js/snow/snowy.js"); }
+        <script>
+            var data = isBroswer();
+            if( (data['chrome'] == true && data['version'] >= 56) || data['chrome'] == false) {
+                document.createElement("script").setAttribute("src", "./js/snow/snowy.js");
+            }
         </script>
 	<style>
         .snow-container

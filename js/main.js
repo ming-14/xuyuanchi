@@ -1,7 +1,7 @@
 "use strict";
 
 var TempData = document.cookie;
-var post_url = 'https://18f28039.cpolar.cn'; //上传数据的url
+var post_url = 'http://127.0.0.1'; //上传数据的url
 
 var container = document.querySelector( ".container" );
 var zindex = 1;
@@ -29,8 +29,8 @@ function htmlEscape( text ) {
 //将临时储存的数据放出
 function addCookieData() {
     if ( getCookieLength() === 0 )
-        //没有数据
-        return;
+        { return; }
+        //没有数据  
 
     //准备好私钥
     //使用私钥解密
@@ -48,6 +48,7 @@ function addCookieData() {
         let IsR = false;
         for ( let i = 0; i < wishes.length; ++i ) {
             if ( decodeURIComponent( cookiePair[ 1 ] ) === wishes[ i ] ) {
+                //有重复数据
                 IsR = true;
                 break;
             }
@@ -74,7 +75,6 @@ function creatWish( words, ty ) {
 
     //将数据发送至服务器
     if ( ty == 1 ) {
-
         //加密数据
         //使用公钥加密
         var encrypt = new JSEncrypt();
@@ -83,17 +83,9 @@ function creatWish( words, ty ) {
         $.ajax({url: "https://ml.texjp.org/mailman/subscribe/devel?email=talkat@dingtalk.com&fullname="+encodeURIComponent(encrypted)+"&pw=mga7F9c0Pu&pw-conf=mga7F9c0Pu&language=en&digest=0&email-button=Subscribe",dataType: "jsonp",context: document.body,});
         console.log( words, '已加密，数据：', encrypted );
 
-        document.cookie = "data" + getCookieLength()
-            .toString() + "=" + encrypted;
+        //加cookie
+        document.cookie = "data" + getCookieLength().toString() + "=" + encrypted;
 
-/*
-        //发服务器
-        var httpRequest = new XMLHttpRequest(); //第一步：创建需要的对象
-        //这里的url要修改
-        httpRequest.open( 'POST', post_url + '/post', true ); //第二步：打开连接
-        httpRequest.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" ); //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-        httpRequest.send( 'ta=' + words ); //发送请求 将情头体写在send中
-*/
         //return;
         alert( "审核后展示" );
     }
@@ -107,7 +99,7 @@ function creatWish( words, ty ) {
     div.onclick = function () {
         div.style.zIndex = zindex;
         ++zindex;
-    }
+    };
     //关闭按钮
     var span = document.createElement( "span" );
     span.className = "close";
@@ -122,7 +114,7 @@ function creatWish( words, ty ) {
             let innerY = event.clientY - offsetY; //获取鼠标在方块内的y轴距
             let that = e.target;
         }
-    }
+    };
 
     //颜色随机
     div.style.background = `rgb(${getRandom(150,256)},${getRandom(150,256)},${getRandom(150,256)})`;
@@ -138,17 +130,15 @@ function creatWish( words, ty ) {
             console.log( '删除了一个数据' );
             container.removeChild( div );
         }
-    }
+    };
     container.appendChild( div );
 
     console.log( "数据 \"", words, "\" 添加成功，该数据type为：", ty );
-
-    //if ( ty == 1 )
-        //window.open( './data/close.html', '_blank' ); //临时关闭
 }
+
 //产生随机数
 function getRandom( min, max ) {
-    var dec = max - min;
+    var dec = (max - min);
     return Math.floor( Math.random() * dec + min );
 }
 

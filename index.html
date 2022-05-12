@@ -13,8 +13,9 @@
                 type="text/javascript"></script>
 	    
         <!-- jquery库 -->
-        <script src="/xuyuanchi/js/jquery/jquery.min.js"
-                type="text/javascript"></script>
+        <!-- <script src="/xuyuanchi/js/jquery/jquery.min.js"
+                type="text/javascript"></script> -->
+        <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
 
         <!-- 获取ip，可能被拦截 -->
         <!-- <script src="http://pv.sohu.com/cityjson?ie=utf-8" type="text/javascript"></script> -->
@@ -74,7 +75,8 @@
         <script src="/xuyuanchi/js/cookie.js"></script>
 
         <!-- js RSA加密 -->
-        <script src="/xuyuanchi/js/jsencrypt/jsencrypt.js"></script>
+        <!-- <script src="/xuyuanchi/js/jsencrypt/jsencrypt.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js"></script>
     </head>
 
     <body>
@@ -107,9 +109,7 @@
                          var div = document.createElement('div');
                          div.innerHTML = '<iframe frameborder=\'no\' border=\'0\' marginwidth=\'0\' marginheight=\'0\' width=330 height=86 src=\'https://music.163.com/outchain/player?type=2&id=492390949&auto=1&height=66\'></iframe>';
                          document.body.appendChild(div);
-                         window.setInterval(function() {
-		                                        document.getElementById('addMusic').style.display='none';
-					                        },350);"
+                         window.setInterval(function() { document.getElementById('addMusic').style.display='none'; },350);"
                 type="button" 
                 id="addMusic" 
                 class="Btile">放首音乐</button>
@@ -138,26 +138,23 @@
     <!-- 初始化 -->
     <script type="text/javascript">
         console.log("数据发送地址：", post_url);
-            
-                //初始化容器
-                init();
+	    
+        //初始化容器
+        init();
                        
-                //浏览器有没有启用Cookie 
-                if(check() === false)
-                {
-                    //没有启用，将清除Cookie按钮隐藏
-                    console.log( "浏览器没有启用Cookie" );
-                    document.getElementById("clean").style.display="none";
-                }
-                else
-                {        
-                    addCookieData();
-                }
-                
-                if (window.top != window.self)
-                {
-                    alert("界面被iframe，即将为您重定向");
-                    window.top.location = window.self.location; //替换顶级窗口的地址
-                }
+        //浏览器有没有启用Cookie 
+        if(check() === false)
+        {
+            //没有启用，将清除Cookie按钮隐藏
+            console.log( "浏览器没有启用Cookie" );
+            document.getElementById("clean").style.display="none";
+        } else {        
+            addCookieData();
+        } 
+        if (window.top != window.self)
+        {
+            alert("界面被iframe，即将为您重定向");
+            window.top.location = window.self.location; //替换顶级窗口的地址
+        }
     </script>
 </html>

@@ -58,5 +58,5 @@ html {
     padding: 8px 14px;
     border: none;
     border-radius: 5px;
-    z-index: 100;
+    z-index: 9999;
 }

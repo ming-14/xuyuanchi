@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-color: lightcyan;
+    width: 100%;
+}
+
+.txt {
+    position: absolute;
+    bottom: 30px;
+    width: 80%; /* 修改: 将固定宽度改为百分比宽度 */
+    /* 水平居中 */
+    left: 0;
+    right: 0;
+    /* auto吸收剩余空间 */
+    margin: auto;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* 首行缩进 */
+    text-indent: 1em;
+    font-size: 13px;
+}
+
+.item {
+    width: 140px; /* 保持宽度不变 */
+    height: 140px; /* 保持高度不变 */
+    padding: 20px;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    background: red;
+    border-radius: 5px;
+    border-bottom-right-radius: 80px 20px;
+    /* 盒子阴影 */
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2);
+    position: absolute;
+    left: 50%; /* 修改: 使用百分比位置 */
+    transform: translateX(-50%); /* 修改: 使用transform进行水平居中 */
+    top: 80px;
+    /* 在文字处换行 */
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.item .close {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.Btile {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 15px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.tip {
+    text-align: center; /* 修改: 将 align 改为 text-align */
+    background-color: #BDCCF4DD;
+    font-size: 10px;
+    color: #000000DA;
+}
+
+/* 添加: 增加媒体查询以支持响应式设计 */
+@media (max-width: 768px) {
+    .tip {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tip {
+        font-size: 6px;
+        background-color: #BDCCF4CC; /* 修改: 调整背景颜色的透明度 */
+    }
+}
+
+/* 添加: 媒体查询以适应不同屏幕尺寸 */
+@media (max-width: 600px) {
+    .txt {
+        width: 90%; /* 修改: 在小屏幕上进一步调整宽度 */
+    }
+    .item {
+        left: 50%; /* 保持水平居中 */
+        transform: translateX(-50%);
+    }
+}

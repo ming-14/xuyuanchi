@@ -5,4 +5,4 @@
 
 ---
 效果
-<https://ming-14.github.io/xuyuanchi-public/public/>
+<https://ming-14.github.io/xuyuanchi-pages/>

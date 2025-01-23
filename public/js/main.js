@@ -1,7 +1,7 @@
 "use strict";
 
 var TempData = document.cookie;
-var api_url = 'https://xuanyuanchi.glitch.me'; // 上传数据的url
+var api_url = ''; // 上传数据的url
 
 var container = document.querySelector(".container");
 var zindex = 1;

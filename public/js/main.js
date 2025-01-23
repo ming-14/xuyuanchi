@@ -34,6 +34,9 @@ function addCookieData() {
     }
 }
 
+document.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+  }, { passive: false });
 // 创建一个愿望
 function creatWish(words, ty) {
     // 删掉输入框原有内容
@@ -72,6 +75,23 @@ function creatWish(words, ty) {
     };
     container.appendChild(div);
 
+    // 拖动功能
+    interact(div)
+        .draggable({
+            listeners: {
+                move: function (event) {
+                    var target = event.target;
+                    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                    target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+                    target.setAttribute('data-x', x);
+                    target.setAttribute('data-y', y);
+                }
+            }
+        });
+
     console.log("数据 \"", words, "\" 添加成功，该数据type为：", ty);
 
     // 将数据发送至服务器
@@ -106,7 +126,7 @@ function submitData(words) {
 function getRandom(min, max) { var dec = (max - min); return Math.floor(Math.random() * dec + min) }
 
 // 生成默认愿望
-function init(Callback) {
+function init(Callback = () => { }) {
     $.ajax(
         {
             url: api_url + "/api/getBoxs",
@@ -118,8 +138,9 @@ function init(Callback) {
                     creatWish(data[i].content, 0)
                 }
                 addCookieData()
+                Callback();
             },
-            error: function (err) {},
+            error: function (err) { Callback(); },
             dataType: "json"
         });
 }
@@ -154,7 +175,11 @@ function addMusicPlayer() {
     window.setInterval(function () { document.getElementById('addMusic').style.display = 'none'; }, 350);
 }
 
+var BoxLock = false;
 function reloadBox() {
+    if (BoxLock) return;
+    BoxLock = true;
+
     // 删除document.querySelector(".container")里面的所有内容
     var container = document.querySelector(".container");
     while (container.firstChild) {
@@ -162,5 +187,5 @@ function reloadBox() {
     }
 
     // 重新加载数据
-    init();
+    init(() => { BoxLock = false; });
 }

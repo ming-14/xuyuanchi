@@ -43,6 +43,7 @@ html {
     /* 在文字处换行 */
     word-wrap: break-word;
     overflow: hidden;
+    user-select: none; /* 添加: 禁止选中文字 */
 }
 
 .item .close {

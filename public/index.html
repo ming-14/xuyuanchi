@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>许愿池</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=0.5, maximum-scale=0.4, minimum-scale=1.0, user-scalable=yes">
+
+    <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.net/interact.js/1.10.26/interact.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/library/snow/snowy.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./js/library/snow/snowy.min.css">
+    <div class="snow-container"></div>
+    <script src="./js/library/mouse-click/mouse-click-love.min.js"></script>
+    <script src="./js/tool.js"></script>
+    <script src="./js/library/cookie.min.js"></script>
+</head>
+
+<body>
+
+    <p class="tip">It's tips.</p>
+    <!-- 删除Cookie -->
+    <button onclick="handleClearCookies()" type="button" id="clean" class="Btile">删Cookie</button>
+    <button onclick="addMusicPlayer()" type="button" id="addMusic" class="Btile" style="display:none">放首音乐</button>
+    <button onclick="reloadBox();" type="button" id="refresh" class="Btile">刷新</button>
+
+    <div class="container">
+        <!-- 
+        <div class="item">
+            <p>愿望</p>
+            <span class="close">X</span>
+        </div> 
+    -->
+    </div>
+
+    <input type="text" class="txt" id="wish" placeholder="内心的想法，或者愿望">
+</body>
+
+<!-- 基本Js -->
+<script src="./js/main.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+    (function () {
+        if (isOnline()) {
+            console.log("在线服务，" +"Api：" + api_url);
+            wishes = ["Tip：无法连接服务器，已启动本地服务"];
+        }
+        else
+        {
+            console.log("离线服务");
+        }
+    })();
+
+    (function () {
+        // 不允移动界面，防止拖动时误触
+        document.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+        }, { passive: false });
+
+        // 浏览器有没有启用Cookie 
+        if (check() === false) {
+            // 没有启用，将清除Cookie按钮隐藏
+            console.log("浏览器没有启用Cookie");
+            document.getElementById("clean").style.display = "none";
+        }
+
+        // 加载Box
+        reloadBox();
+    })();
+
+    var upLock = false;
+    (function () {
+        var txt = document.querySelector(".txt");
+        txt.onkeydown = function (e) {
+            if (e.keyCode !== 13) { //判断是否回车
+                return;
+            } else if (txt.value) {
+                if (upLock == true) return;
+                upLock = true;
+
+                creatWish(txt.value);
+                submitData(txt.value);
+                document.cookie = "data" + getCookieLength().toString() + "=" + txt.value;
+                document.getElementById("wish").value = "";
+            }
+            upLock = false;
+        }
+    })();
+</script>
+
+</html>

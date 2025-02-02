@@ -18,7 +18,7 @@ function connectDatabase() {
             setTimeout(() => {
                 console.log("尝试重新连接数据库...");
                 connectDatabase();
-            }, 2000); // 2秒后重试，可以根据需要调整时间
+            }, 2000); // 2秒后重试
         } else {
             console.log("数据库连接成功");
         }
@@ -28,18 +28,17 @@ function connectDatabase() {
     db.on('error', (err) => {
         console.error('数据库错误：', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            // 如果是连接丢失错误，尝试重新连接
+            // 连接丢失错误，尝试重新连接
             console.log("检测到连接丢失，尝试重新连接数据库...");
             connectDatabase();
         } else if (err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
-            // 如果是致命错误后尝试添加查询，关闭当前连接并尝试重新连接
+            // 致命错误后尝试添加查询，关闭当前连接并尝试重新连接
             console.log("检测到致命错误，关闭当前连接并尝试重新连接数据库...");
             db.end();
             connectDatabase();
         } else {
-            // 其他错误，可以在这里处理
+            // 其他错误
             console.error("其他错误，报错如下：\n" + err);
-            // 你可能需要在这里添加更多的错误处理逻辑
         }
     });
 

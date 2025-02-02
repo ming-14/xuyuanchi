@@ -51,7 +51,7 @@ app.get('/api/getBoxs', (req, res) => {
     let sql = "SELECT * FROM boxs";
     db.query(sql, (err, result) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json({ code: -1 });
         } else res.json(result);
     });
@@ -65,7 +65,7 @@ app.get('/api/getABox/:id', (req, res) => {
     let sql = `SELECT * FROM boxs WHERE id = ${req.params.id}`;
     db.query(sql, (err, result) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json({ code: -1 });
         } else res.json(result);
     });
@@ -79,7 +79,7 @@ app.post('/api/deleteABox/:id', (req, res) => {
     let sql = `DELETE FROM boxs WHERE id = ${req.params.id}`;
     db.query(sql, (err, result) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json({ code: -1 });
         } else res.json({ code: 200 });
     });
@@ -93,13 +93,13 @@ app.post('/api/deleteABox/:id', (req, res) => {
 // }
 // +-+-+-+-+-+-+-+-
 app.post('/api/post', (req, res) => {
-    console.log('接收到数据：', req.body.data);
     let sql = `INSERT INTO boxs (content) VALUES (?)`;
     db.query(sql, [req.body.data], (err, result) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.json({ code: -1 });
         } else {
+            console.log('数据：', req.body.data, " 成功写入数据库");
             res.json({ code: 200 });
         }
     });

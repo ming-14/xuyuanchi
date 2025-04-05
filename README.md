@@ -33,7 +33,7 @@ xuyuanchi
 │                  snowy.min.css
 │                  snowy.min.js
 │
-└─ 后端API
+└─serivce 后端API
         config.js 配置文件，包括数据库信息
         database.js 数据库连接模块
         package-lock.json 
